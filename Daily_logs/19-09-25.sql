@@ -81,6 +81,27 @@ where coalesce(d.Salary, t.Salary) =
         full OUTER JOIN test t2
             on d2.EPID = t2.EPID
       );
+SELECT *
+FROM (
+    SELECT * FROM Developer
+    UNION ALL
+    SELECT * FROM Test
+) AS Combined
+WHERE Salary = (
+    SELECT MIN(Salary)
+    FROM (
+        SELECT Salary FROM Developer
+        UNION ALL
+        SELECT Salary FROM Test
+    ) AS Salaries
+);
+
+/* select * from (select * from Developer
+	union all select * from test) as Salary
+	where Salary= (select min(coalesce(d2.Salary, t2.Salary))
+        from Developer d2
+        full OUTER JOIN test t2
+            on d2.EPID = t2.EPID); */
 
 -- removing duplicate values -cte
 with cts as (
