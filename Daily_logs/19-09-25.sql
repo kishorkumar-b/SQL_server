@@ -119,15 +119,15 @@ cast(Date_of_joining as datetime2) at time zone 'UTC' at time zone 'India Standa
 ,Salary,Roll from Developer;
 
 -- order a-z
-select * from DEVELOPER
+select * , 'dev' as depart from DEVELOPER
 union
-select * from test order by Name desc ;
+select *, 'test' as depart from test order by Name desc ;
 
 --order developer[a-z] than test[a-z]
 
-select *, 'dev' as sortorder
+select *, '1' as sortorder
 from Developer union all
-select *, 'test' as sortorder
+select *, '2' as sortorder
 from test order by sortorder,name
 
 -- select top next 3 salary
