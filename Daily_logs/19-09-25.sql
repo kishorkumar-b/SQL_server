@@ -139,3 +139,32 @@ select * from test
 order by Salary desc
 offset 3 rows
 fetch next 3 rows only;
+-- procedure
+CREATE PROCEDURE update_salary
+    @em_id INT,
+    @em_salary INT
+AS
+BEGIN
+    UPDATE Developer
+    SET Salary = @em_salary
+    WHERE EPID = @em_id;
+END;
+GO
+
+EXEC update_salary 101, 75000;
+-- function
+CREATE FUNCTION get_salary(@em_id INT)
+RETURNS INT
+AS
+BEGIN
+    DECLARE @emp_salary INT;
+
+    SELECT @emp_salary = Salary
+    FROM Developer
+    WHERE EPID = @em_id;
+
+    RETURN @emp_salary;
+END;
+GO
+
+SELECT dbo.get_salary(101);
