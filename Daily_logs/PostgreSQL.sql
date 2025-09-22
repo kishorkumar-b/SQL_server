@@ -104,3 +104,15 @@ SELECT * FROM (
 ORDER BY Salary DESC
 OFFSET 3
 LIMIT 3;
+
+--store procedure to update salary
+create procedure update_salary (in em_id int,in em_salary int)
+language plpgsql
+as $$
+begin
+update Developer set
+Salary=em_salary where EPID = em_id;
+end;
+$$;
+
+call update_salary(1,80000)
