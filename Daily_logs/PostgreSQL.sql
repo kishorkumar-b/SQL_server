@@ -116,3 +116,20 @@ end;
 $$;
 
 call update_salary(1,80000)
+--functions
+CREATE FUNCTION get_salary(em_id INT)
+RETURNS INT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    emp_salary INT;
+BEGIN
+    SELECT salary INTO emp_salary
+    FROM Developer
+    WHERE EPID = em_id;
+
+    RETURN emp_salary;
+END;
+$$;
+
+SELECT get_salary(1)
